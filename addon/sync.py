@@ -28,21 +28,20 @@ logging.basicConfig(
 log = logging.getLogger("camera-save")
 
 
-def load_config() -> dict:
-    cameras_json = os.environ.get("CAMERAS_JSON", "[]")
-    try:
-        cameras = json.loads(cameras_json)
-        if not isinstance(cameras, list):
-            cameras = []
-    except json.JSONDecodeError:
-        cameras = []
+OPTIONS_FILE = Path("/data/options.json")
 
+
+def load_config() -> dict:
+    opts = json.loads(OPTIONS_FILE.read_text())
+    cameras = opts.get("cameras", [])
+    if not isinstance(cameras, list):
+        cameras = []
     return {
-        "aws_access_key_id": os.environ["AWS_ACCESS_KEY_ID"],
-        "aws_secret_access_key": os.environ["AWS_SECRET_ACCESS_KEY"],
-        "aws_region": os.environ.get("AWS_REGION", "ap-southeast-2"),
-        "s3_bucket": os.environ["S3_BUCKET"],
-        "upload_delay_minutes": int(os.environ.get("UPLOAD_DELAY_MINUTES", "15")),
+        "aws_access_key_id": opts["aws_access_key_id"],
+        "aws_secret_access_key": opts["aws_secret_access_key"],
+        "aws_region": opts.get("aws_region", "ap-southeast-2"),
+        "s3_bucket": opts["s3_bucket"],
+        "upload_delay_minutes": int(opts.get("upload_delay_minutes", 15)),
         "cameras": cameras,
     }
 

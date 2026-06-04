@@ -12,7 +12,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN uv venv $VIRTUAL_ENV && uv pip install --no-cache -r requirements.txt
 
-COPY run.sh sync.py ./
-RUN chmod +x run.sh
+COPY sync.py ./
 
-CMD ["/app/run.sh"]
+CMD ["python3", "/app/sync.py"]
