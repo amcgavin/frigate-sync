@@ -1,5 +1,5 @@
 name: Camera Save
-version: "1.0.0"
+version: "1.0.1"
 slug: camera_save
 description: Sync Frigate NVR recordings to S3 as 10-minute concatenated windows
 url: https://github.com/amcgavin/frigate-sync
