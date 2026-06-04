@@ -1,0 +1,28 @@
+name: Camera Save
+version: "1.0.0"
+slug: camera_save
+description: Sync Frigate NVR recordings to S3 as 10-minute concatenated windows
+url: https://github.com/alecmcgavin/camera-save
+arch:
+  - aarch64
+  - amd64
+  - armv7
+startup: application
+boot: auto
+map:
+  - media:ro
+options:
+  aws_access_key_id: ""
+  aws_secret_access_key: ""
+  aws_region: ap-southeast-2
+  s3_bucket: ""
+  upload_delay_minutes: 15
+  cameras: []
+schema:
+  aws_access_key_id: str
+  aws_secret_access_key: password
+  aws_region: str
+  s3_bucket: str
+  upload_delay_minutes: int
+  cameras:
+    - str?
