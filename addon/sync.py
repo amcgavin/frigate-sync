@@ -196,7 +196,7 @@ def upload_to_s3(local_path: Path, s3_key: str, cfg: dict) -> bool:
 
     try:
         log.info("Uploading -> s3://%s/%s", cfg["s3_bucket"], s3_key)
-        s3.upload_file(str(local_path), cfg["s3_bucket"], s3_key, ExtraArgs={"ContentType": "video/mp4", "StorageClass": "STANDARD_IA"})
+        s3.upload_file(str(local_path), cfg["s3_bucket"], s3_key, ExtraArgs={"ContentType": "video/mp4", "StorageClass": "GLACIER"})
         return True
     except (BotoCoreError, ClientError) as e:
         log.error("S3 upload failed for %s: %s", s3_key, e)

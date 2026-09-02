@@ -33,7 +33,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "recordings" {
     }
 
     expiration {
-      days = 30
+      days = 14
     }
   }
 }
